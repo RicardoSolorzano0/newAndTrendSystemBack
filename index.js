@@ -5,6 +5,7 @@ const cors = require("cors")
 
 //rutas
 const userRoutes = require("./routes/userRoutes");
+const newsRoutes = require("./routes/newsRoutes");
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(cors())
 
 app.use("/users", userRoutes);
+app.use("/news", newsRoutes);
 
 const PORT = process.env.PORT || 5001
 
