@@ -1,6 +1,5 @@
 const axios = require("axios");
-const dotenv = require("dotenv");
-dotenv.config();
+
 
 const getNews = async (req, res) => {
     const { topic, page = 1 } = req.query;
