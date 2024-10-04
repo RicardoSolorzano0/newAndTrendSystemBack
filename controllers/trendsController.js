@@ -17,7 +17,7 @@ const getTrends = async (req, res) => {
             articles: response.data.articles,
             totalResults: response.data.totalResults,
             currentPage: Number(page),
-            totalPages: Math.ceil(response.data.totalResults / pageSize)
+            totalPages: Math.floor(response.data.totalResults / pageSize)
         });
     } catch (error) {
         return res.status(500).json({ error: 'Error fetching trends' });

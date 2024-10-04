@@ -1,9 +1,8 @@
 const axios = require("axios");
 
-
 const getNews = async (req, res) => {
     const { topic, page = 1 } = req.query;
-    const pageSize = 5;
+    const pageSize = 8;
 
     try {
         const response = await axios.get(`https://newsapi.org/v2/everything`, {
@@ -20,9 +19,10 @@ const getNews = async (req, res) => {
             articles: response.data.articles,
             totalResults: response.data.totalResults,
             currentPage: Number(page),
-            totalPages: Math.ceil(response.data.totalResults / pageSize)
+            totalPages: Math.floor(response.data.totalResults / pageSize)
         });
     } catch (error) {
+        console.log(error);
         return res.status(500).json({ message: "Error al obtener news" });
     }
 }
