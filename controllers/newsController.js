@@ -19,7 +19,7 @@ const getNews = async (req, res) => {
             articles: response.data.articles,
             totalResults: response.data.totalResults,
             currentPage: Number(page),
-            totalPages: Math.floor(response.data.totalResults / pageSize)
+            totalPages: Math.ceil(response.data.totalResults / pageSize)
         });
     } catch (error) {
         console.log(error);
