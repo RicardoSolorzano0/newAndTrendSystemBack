@@ -1,10 +1,10 @@
-const axios = require('axios');
+const { newsApi } = require('../api/newsapi');
 
 const getTrends = async (req, res) => {
     const { page = 1 } = req.query
     const pageSize = 5;
     try {
-        const response = await axios.get(`https://newsapi.org/v2/top-headlines`, {
+        const response = await newsApi.get(`/top-headlines`, {
             params: {
                 country: 'us',
                 pageSize,

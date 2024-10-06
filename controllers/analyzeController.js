@@ -3,10 +3,9 @@ const Analyzer = require('natural').SentimentAnalyzer;
 const stemmer = require('natural').PorterStemmer;
 
 const analyzeSentiment = async (req, res) => {
-    const { topic, headlines, user } = req.body; // Se espera que el cuerpo tenga el tema y los titulares
-
+    const { topic, headlines, user, language = "Spanish" } = req.body; // Se espera que el cuerpo tenga el tema y los titulares
     try {
-        const analyzer = new Analyzer("Spanish", stemmer, "afinn");
+        const analyzer = new Analyzer(language, stemmer, "afinn");
         const results = analyzer.getSentiment(headlines.split(" "))
 
         const finalResult = results > 0 ? 'positivo' : results < 0 ? 'negativo' : 'neutral';
