@@ -22,7 +22,6 @@ const getNews = async (req, res) => {
             totalPages: Math.ceil(response.data.totalResults / pageSize)
         });
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ message: "Error al obtener news" });
     }
 }

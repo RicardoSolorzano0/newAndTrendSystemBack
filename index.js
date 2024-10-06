@@ -20,11 +20,21 @@ const app = express();
 app.use(express.json());
 app.use(cors())
 
+//ruta inicial
+app.get("/", (req, res) => {
+    res.send("Hola mundo");
+})
+
 app.use("/users", userRoutes);
 app.use("/news", newsRoutes);
 app.use("/trends", trendsRoutes);
 app.use("/analyze", analyzeRoutes);
 app.use("/history", historyRoutes)
+
+// ruta por si no encuentra el recurso
+app.use((req, res) => {
+    res.status(404).json({ message: "Ruta no encontrada" });
+});
 
 const PORT = process.env.PORT || 5001
 

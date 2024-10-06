@@ -17,7 +17,7 @@ const registerUser = async (req, res) => {
     try {
         const userExist = await User.findOne({ email });
         if (userExist) {
-            return res.status(400).json({ msg: "El usuario ya existe" });
+            return res.status(400).json({ message: "El usuario ya existe" });
         }
         const user = await User.create({ username, email, password });
         const accessToken = generateAccessToken(user);

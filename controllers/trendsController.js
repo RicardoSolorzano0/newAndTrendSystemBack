@@ -20,7 +20,7 @@ const getTrends = async (req, res) => {
             totalPages: Math.ceil(response.data.totalResults / pageSize)
         });
     } catch (error) {
-        return res.status(500).json({ error: 'Error fetching trends' });
+        return res.status(500).json({ message: 'Error fetching trends' });
     }
 };
 
