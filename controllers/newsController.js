@@ -22,7 +22,10 @@ const getNews = async (req, res) => {
             totalPages: Math.ceil(response.data.totalResults / pageSize)
         });
     } catch (error) {
-        return res.status(500).json({ message: "Error al obtener news" });
+        if (error.status === 426) {
+            return res.status(426).json({ message: "Ha solicitado demasiados resultados. Las cuentas de desarrollador están limitadas a un máximo de 100 resultados. Está intentando solicitar entre 240 y 248 resultados. Actualice a un plan pago si necesita más resultados." });
+        }
+        return res.status(500).json({ message: `Error al obtener noticias sobre ${topic}` });
     }
 }
 
