@@ -1,17 +1,17 @@
-const axios = require("axios");
+const { newsApi } = require("../api/newsapi");
 
 const getNews = async (req, res) => {
-    const { topic, page = 1 } = req.query;
+    const { topic, page = 1, language = "es" } = req.query;
     const pageSize = 8;
 
     try {
-        const response = await axios.get(`https://newsapi.org/v2/everything`, {
+        const response = await newsApi.get(`/everything`, {
             params: {
                 q: topic,
                 apiKey: process.env.NEWS_API_KEY,
                 pageSize,
                 page,
-                language: "es",
+                language: language,
             }
         })
 
