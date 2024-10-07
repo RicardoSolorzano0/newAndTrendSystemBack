@@ -4,7 +4,7 @@ const { ObjectId } = require('mongodb');
 
 const getHistory = async (req, res) => {
     try {
-        const { id, page } = req.query;
+        const { id } = req.query;
 
         //identificando si el usuario es administrador o es usuario
         const user = await User.findById(id)
@@ -14,7 +14,7 @@ const getHistory = async (req, res) => {
         }
 
         const pageSize = await SentimentAnalysis.estimatedDocumentCount();
-        const currentPage = page;
+        const currentPage = 1;
 
         //verificando rol
         if (user.rol === "admin") {
