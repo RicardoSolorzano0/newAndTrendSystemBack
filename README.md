@@ -273,6 +273,19 @@ Componentes Principales
 # Decisiones de Diseño
 
 Desacoplamiento del Backend y Frontend decidi mantener el backend y el frontend desacoplados para que ambos puedan escalar de forma independiente. Esto también facilita el reemplazo o la actualización de uno sin afectar al otro.
+El sistema de carpetas es el convencional en cualquier proyecto de express, pero daremos una breve introducción de cada una de las carpetas y su contenido
+
+- api: contendrá el api a la que le daremos uso en este caso a https://newsapi.org/v2 debido a que notamos que se replicaba no era necesario armar un segundo archivo, y nosotros abordaremos las que necesitemos para el resto de requerimientos, por lo que es la única de terceros que tendremos.
+
+- bd: tendrá la conexión a la base de datos, en nuestro caso mongodb
+
+- controllers: tendremos un controlador por cada api, en cada uno encontraremos las funciones que harán las acciones que necesitamos, por ejemplo, traer las tendencias
+
+- middleware: creamos un middleware pero no lo usamos, este es para protección de rutas, pero debido a que para las api es necesario indicar el usuario, no lo vimos necesario.
+
+- models: tendremos únicamente 2 modelos el de usuario y el de análisis de sentimiento que abordaremos más adelante
+
+- routes: contendrá las rutas a las que vamos a apuntar, y serán encargadas de disparar los controladores que se estimen convenientes.
 
 # Consideraciones importantes:
 
@@ -287,3 +300,5 @@ app.use("/trends", trendsRoutes);En donde podremos ver tendencias relevantes
 app.use("/analyze", analyzeRoutes); En donde la podemos usar para analizar tanto texto en ingles como en español
 
 app.use("/history", historyRoutes) En donde podemos ver tanto el historial de un usuario como el historial de todos los usuarios en caso de ser administradores
+
+En la creación de la base de datos se ha decidido usar usuarios ya que era una de las maneras más adecuadas para poder hacer el ultimo requerimiento, esto nos permitía que cada usuario tuviera sus propias búsquedas, y hacer que el requerimiento tuviera más sentido, dando explicaciones a ¿Los usuarios buscan más noticias o tendencias negativas? ¿Positivas? ¿Neutras?, pero los usuarios no tienen que ser capaces de ver la información de los otros usuarios por lo que se asignó un rol a cada usuario, y a uno en específico de usuario admin, que será el único que podrá ver esta información.
